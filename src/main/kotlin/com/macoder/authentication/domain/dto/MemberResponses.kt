@@ -1,10 +1,9 @@
 package com.macoder.authentication.domain.dto
 
-import com.macoder.authentication.common.MemberType
-import com.macoder.authentication.domain.entity.Member
+import com.macoder.core.enum.MemberType
+import com.macoder.core.entity.Member
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
-import java.util.*
 
 data class SignUpResponse(
     @Schema(description = "회원 고유키", example = "1")

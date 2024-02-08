@@ -1,7 +1,7 @@
 package com.macoder.authentication.service
 
 import com.macoder.authentication.domain.dto.MemberUpdateRequest
-import com.macoder.authentication.domain.entity.Member
+import com.macoder.core.entity.Member
 import com.macoder.authentication.persistence.MemberRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach

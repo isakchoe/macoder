@@ -1,6 +1,6 @@
 package com.macoder.authentication.service
 
-import com.macoder.authentication.common.MemberType
+import com.macoder.core.enum.MemberType
 import com.macoder.authentication.domain.dto.MemberInfoResponse
 import com.macoder.authentication.persistence.MemberRepository
 import org.springframework.stereotype.Service

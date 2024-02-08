@@ -4,7 +4,7 @@ import com.macoder.authentication.domain.dto.SignInRequest
 import com.macoder.authentication.domain.dto.SignInResponse
 import com.macoder.authentication.domain.dto.SignUpRequest
 import com.macoder.authentication.domain.dto.SignUpResponse
-import com.macoder.authentication.domain.entity.Member
+import com.macoder.core.entity.Member
 import com.macoder.authentication.persistence.MemberRepository
 import com.macoder.authentication.security.TokenProvider
 import com.macoder.authentication.util.flushOrThrow

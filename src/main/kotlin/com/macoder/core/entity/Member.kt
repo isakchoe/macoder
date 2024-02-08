@@ -1,6 +1,6 @@
-package com.macoder.authentication.domain.entity
+package com.macoder.core.entity
 
-import com.macoder.authentication.common.MemberType
+import com.macoder.core.enum.MemberType
 import com.macoder.authentication.domain.dto.MemberUpdateRequest
 import com.macoder.authentication.domain.dto.SignUpRequest
 import jakarta.persistence.*
@@ -15,20 +15,24 @@ class Member(
     val account: String,
 
     @Column(nullable = false)
-    var password: String,
+    private var password: String,
 
-    var name: String? = null,
+    private var name: String? = null,
 
-    var age: Int? = null,
+    private var age: Int? = null,
 
     @Enumerated(EnumType.STRING)
-    val type: MemberType = MemberType.USER
-) {
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    private var type: MemberType = MemberType.USER,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null
+
+) {
+    val createdAt: LocalDateTime = LocalDateTime.now()
+
+    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
+    val stylist:Stylist ?= null
 
     companion object {
         fun from(request: SignUpRequest, encoder: PasswordEncoder) = Member(

@@ -1,6 +1,6 @@
 package com.macoder.authentication.exception
 
-import com.macoder.authentication.common.ApiStatus
+import com.macoder.core.enum.ApiStatus
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc

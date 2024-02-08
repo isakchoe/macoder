@@ -1,6 +1,7 @@
 package com.macoder.authentication.controller
 
 import com.macoder.authentication.domain.dto.ApiResponse
+import com.macoder.authentication.domain.dto.MemberUpdateRequest
 import com.macoder.authentication.security.UserAuthorize
 import com.macoder.authentication.service.MemberService
 import io.swagger.v3.oas.annotations.Operation
@@ -19,19 +20,19 @@ class MemberController(private val memberService: MemberService) {
     @GetMapping
     fun getMemberInfo(@AuthenticationPrincipal user: User) = ApiResponse.success(memberService.getMemberInfo(user.username.toInt()))
 
-//    @Operation(summary = "회원 탈퇴")
-//    @DeleteMapping
-//    fun deleteMember(@AuthenticationPrincipal user: User) =
-//        ApiResponse.success(memberService.deleteMember(UUID.fromString(user.username)))
-//
-//    @Operation(summary = "회원 정보 수정")
-//    @PutMapping
-//    fun updateMember(@AuthenticationPrincipal user: User, @RequestBody request: MemberUpdateRequest) =
-//        ApiResponse.success(memberService.updateMember(UUID.fromString(user.username), request))
-//
-//
-//    @Operation(summary = "스타일리스트 자격 신청")
-//    @PutMapping
-//    fun updateMemberToStylist(@AuthenticationPrincipal user: User, @RequestBody request: MemberUpdateRequest) =
-//        ApiResponse.success(memberService.updateMember(UUID.fromString(user.username), request))
+    @Operation(summary = "회원 탈퇴")
+    @DeleteMapping
+    fun deleteMember(@AuthenticationPrincipal user: User) =
+        ApiResponse.success(memberService.deleteMember(user.username.toInt()))
+
+    @Operation(summary = "회원 정보 수정")
+    @PutMapping
+    fun updateMember(@AuthenticationPrincipal user: User, @RequestBody request: MemberUpdateRequest) =
+        ApiResponse.success(memberService.updateMember(user.username.toInt(), request))
+
+
+    @Operation(summary = "스타일리스트 자격 신청")
+    @PutMapping
+    fun updateMemberToStylist(@AuthenticationPrincipal user: User, @RequestBody request: MemberUpdateRequest) =
+        ApiResponse.success(memberService.updateMemberToStylist(user.username.toInt(), request))
 }

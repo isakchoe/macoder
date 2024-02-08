@@ -1,4 +1,4 @@
-package com.macoder.authentication.common
+package com.macoder.core.enum
 
 enum class ApiStatus {
     SUCCESS,

@@ -1,7 +1,7 @@
 package com.macoder.authentication
 
-import com.macoder.authentication.common.MemberType
-import com.macoder.authentication.domain.entity.Member
+import com.macoder.core.enum.MemberType
+import com.macoder.core.entity.Member
 import com.macoder.authentication.persistence.MemberRepository
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner

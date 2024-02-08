@@ -1,7 +1,7 @@
 package com.macoder.authentication.persistence
 
-import com.macoder.authentication.common.MemberType
-import com.macoder.authentication.domain.entity.Member
+import com.macoder.core.enum.MemberType
+import com.macoder.core.entity.Member
 
 import org.springframework.data.jpa.repository.JpaRepository
 

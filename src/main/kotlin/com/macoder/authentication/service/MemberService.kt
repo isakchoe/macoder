@@ -33,4 +33,13 @@ class MemberService(
         member.update(request, encoder)
         return MemberUpdateResponse.of(true, member)
     }
+
+    @Transactional
+    fun updateMemberToStylist(id: Int, request: MemberUpdateRequest): MemberUpdateResponse {
+        val member = memberRepository.findByIdOrNull(id)?.takeIf { encoder.matches(request.password, it.password) }
+            ?: throw IllegalArgumentException("아이디 또는 비밀번호가 일치하지 않습니다.")
+        member.updateToStylist()
+        return MemberUpdateResponse.of(true, member)
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.macoder.authentication.domain.dto
 
-import com.macoder.authentication.common.ApiStatus
+import com.macoder.core.enum.ApiStatus
 
 data class ApiResponse(
     val status: ApiStatus,
