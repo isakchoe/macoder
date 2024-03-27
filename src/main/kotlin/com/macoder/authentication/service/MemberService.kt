@@ -4,8 +4,11 @@ import com.macoder.authentication.domain.dto.MemberDeleteResponse
 import com.macoder.authentication.domain.dto.MemberInfoResponse
 import com.macoder.authentication.domain.dto.MemberUpdateRequest
 import com.macoder.authentication.domain.dto.MemberUpdateResponse
+import com.macoder.authentication.domain.dto.MemberUpdateStylistResponse
 import com.macoder.authentication.persistence.MemberRepository
+import com.macoder.authentication.persistence.StylistRepository
 import com.macoder.authentication.util.findByIdOrThrow
+import com.macoder.core.entity.Stylist
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -14,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class MemberService(
     private val memberRepository: MemberRepository,
+    private val stylistRepository: StylistRepository,
     private val encoder: PasswordEncoder
 ) {
     @Transactional(readOnly = true)
@@ -35,11 +39,12 @@ class MemberService(
     }
 
     @Transactional
-    fun updateMemberToStylist(id: Int, request: MemberUpdateRequest): MemberUpdateResponse {
+    fun updateMemberToStylist(id: Int, request: MemberUpdateRequest): MemberUpdateStylistResponse {
         val member = memberRepository.findByIdOrNull(id)?.takeIf { encoder.matches(request.password, it.password) }
             ?: throw IllegalArgumentException("아이디 또는 비밀번호가 일치하지 않습니다.")
-        member.updateToStylist()
-        return MemberUpdateResponse.of(true, member)
-    }
 
+        val stylist = Stylist(member)
+        stylistRepository.save(stylist)
+        return MemberUpdateStylistResponse.of(true, stylist)
+    }
 }

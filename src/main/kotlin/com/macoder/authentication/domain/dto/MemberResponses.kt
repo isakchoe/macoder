@@ -2,6 +2,7 @@ package com.macoder.authentication.domain.dto
 
 import com.macoder.core.enum.MemberType
 import com.macoder.core.entity.Member
+import com.macoder.core.entity.Stylist
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 
@@ -50,6 +51,33 @@ data class MemberUpdateResponse(
         )
     }
 }
+
+data class MemberUpdateStylistResponse(
+    @Schema(description = "회원 정보 수정 성공 여부", example = "true")
+    val result: Boolean,
+    @Schema(description = "회원 이름", example = "콜라곰")
+    val name: String?,
+    @Schema(description = "회원 나이", example = "27")
+    val age: Int?,
+
+    @Schema(description = "스타일리스트 평점", example = "4.5")
+    var starPoint: Double?,
+
+    @Schema(description = "스타일리스트 이력", example = "3년차 스타일리스트")
+    var jobProfile: String?,
+) {
+    companion object {
+        fun of(result: Boolean, stylist: Stylist) = MemberUpdateStylistResponse(
+            result = result,
+            name = stylist.member.name,
+            age = stylist.member.age,
+            starPoint = stylist.starPoint,
+            jobProfile = stylist.jobProfile
+        )
+    }
+}
+
+
 
 data class MemberInfoResponse(
     @Schema(description = "회원 고유키", example = "123e4567-e89b-12d3-a456-426614174000")
