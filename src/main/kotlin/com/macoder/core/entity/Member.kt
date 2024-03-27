@@ -15,14 +15,14 @@ class Member(
     val account: String,
 
     @Column(nullable = false)
-    private var password: String,
+    var password: String,
 
-    private var name: String? = null,
+    var name: String? = null,
 
-    private var age: Int? = null,
+    var age: Int? = null,
 
     @Enumerated(EnumType.STRING)
-    private var type: MemberType = MemberType.USER,
+    var type: MemberType = MemberType.USER,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

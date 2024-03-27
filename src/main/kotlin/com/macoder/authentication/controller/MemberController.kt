@@ -32,7 +32,7 @@ class MemberController(private val memberService: MemberService) {
 
 
     @Operation(summary = "스타일리스트 자격 신청")
-    @PutMapping
+    @PostMapping()
     fun updateMemberToStylist(@AuthenticationPrincipal user: User, @RequestBody request: MemberUpdateRequest) =
         ApiResponse.success(memberService.updateMemberToStylist(user.username.toInt(), request))
 }

@@ -30,7 +30,8 @@ data class SignInResponse(
     val name: String?,
     @Schema(description = "회원 유형", example = "USER")
     val type: MemberType,
-    val token: String
+    val accessToken: String,
+    val refreshToken: String
 )
 
 data class MemberUpdateResponse(
