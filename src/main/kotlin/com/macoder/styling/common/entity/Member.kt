@@ -1,12 +1,11 @@
-package com.macoder.styling.core.entity
+package com.macoder.styling.common.entity
 
-import com.macoder.styling.core.enum.MemberType
+import com.macoder.styling.common.enum.MemberType
 import com.macoder.styling.authentication.dto.MemberUpdateRequest
 import com.macoder.styling.authentication.dto.SignUpRequest
 import jakarta.persistence.*
 import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDateTime
-import java.util.*
 
 @Entity
 class Member(

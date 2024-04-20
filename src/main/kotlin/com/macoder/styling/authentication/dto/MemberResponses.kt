@@ -1,8 +1,8 @@
 package com.macoder.styling.authentication.dto
 
-import com.macoder.styling.core.enum.MemberType
-import com.macoder.styling.core.entity.Member
-import com.macoder.styling.core.entity.Stylist
+import com.macoder.styling.common.enum.MemberType
+import com.macoder.styling.common.entity.Member
+import com.macoder.styling.common.entity.Stylist
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 

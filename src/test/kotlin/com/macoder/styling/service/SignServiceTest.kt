@@ -1,9 +1,9 @@
 package com.macoder.styling.service
 
-import com.macoder.styling.core.enum.MemberType
+import com.macoder.styling.common.enum.MemberType
 import com.macoder.styling.authentication.dto.SignInRequest
 import com.macoder.styling.authentication.dto.SignUpRequest
-import com.macoder.styling.core.entity.Member
+import com.macoder.styling.common.entity.Member
 import com.macoder.styling.authentication.persistence.MemberRepository
 import com.macoder.styling.authentication.service.SignService
 import org.assertj.core.api.Assertions.assertThat

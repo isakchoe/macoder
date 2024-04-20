@@ -1,4 +1,4 @@
-package com.macoder.styling.core.entity
+package com.macoder.styling.common.entity
 
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity

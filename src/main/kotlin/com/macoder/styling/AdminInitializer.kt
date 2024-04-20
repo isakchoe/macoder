@@ -1,7 +1,7 @@
 package com.macoder.styling
 
-import com.macoder.styling.core.enum.MemberType
-import com.macoder.styling.core.entity.Member
+import com.macoder.styling.common.enum.MemberType
+import com.macoder.styling.common.entity.Member
 import com.macoder.styling.authentication.persistence.MemberRepository
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner

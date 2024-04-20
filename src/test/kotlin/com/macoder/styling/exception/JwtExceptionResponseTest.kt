@@ -1,6 +1,6 @@
 package com.macoder.styling.exception
 
-import com.macoder.styling.core.enum.ApiStatus
+import com.macoder.styling.common.enum.ApiStatus
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc

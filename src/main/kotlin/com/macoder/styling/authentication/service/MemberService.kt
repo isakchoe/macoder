@@ -8,7 +8,7 @@ import com.macoder.styling.authentication.dto.MemberUpdateStylistResponse
 import com.macoder.styling.authentication.persistence.MemberRepository
 import com.macoder.styling.authentication.persistence.StylistRepository
 import com.macoder.styling.util.findByIdOrThrow
-import com.macoder.styling.core.entity.Stylist
+import com.macoder.styling.common.entity.Stylist
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service

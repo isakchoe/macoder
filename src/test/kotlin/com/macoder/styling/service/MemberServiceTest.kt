@@ -1,7 +1,7 @@
 package com.macoder.styling.service
 
 import com.macoder.styling.authentication.dto.MemberUpdateRequest
-import com.macoder.styling.core.entity.Member
+import com.macoder.styling.common.entity.Member
 import com.macoder.styling.authentication.persistence.MemberRepository
 import com.macoder.styling.authentication.service.MemberService
 import org.assertj.core.api.Assertions.assertThat

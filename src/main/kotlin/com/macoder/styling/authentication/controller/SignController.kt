@@ -1,6 +1,6 @@
 package com.macoder.styling.authentication.controller
 
-import com.macoder.styling.authentication.dto.ApiResponse
+import com.macoder.styling.common.dto.ApiResponse
 import com.macoder.styling.authentication.dto.SignUpRequest
 import com.macoder.styling.authentication.dto.SignInRequest
 import com.macoder.styling.authentication.service.SignService

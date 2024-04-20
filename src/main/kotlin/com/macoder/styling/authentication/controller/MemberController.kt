@@ -1,6 +1,6 @@
 package com.macoder.styling.authentication.controller
 
-import com.macoder.styling.authentication.dto.ApiResponse
+import com.macoder.styling.common.dto.ApiResponse
 import com.macoder.styling.authentication.dto.MemberUpdateRequest
 import com.macoder.styling.authentication.security.UserAuthorize
 import com.macoder.styling.authentication.service.MemberService
@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.User
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 @Tag(name = "로그인 후 사용할 수 있는 API")
 @UserAuthorize

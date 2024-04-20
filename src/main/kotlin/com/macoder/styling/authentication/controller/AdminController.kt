@@ -1,6 +1,6 @@
 package com.macoder.styling.authentication.controller
 
-import com.macoder.styling.authentication.dto.ApiResponse
+import com.macoder.styling.common.dto.ApiResponse
 import com.macoder.styling.authentication.security.AdminAuthorize
 import com.macoder.styling.authentication.service.AdminService
 import io.swagger.v3.oas.annotations.Operation

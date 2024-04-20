@@ -1,6 +1,6 @@
 package com.macoder.styling.authentication.service
 
-import com.macoder.styling.core.enum.MemberType
+import com.macoder.styling.common.enum.MemberType
 import com.macoder.styling.authentication.dto.MemberInfoResponse
 import com.macoder.styling.authentication.persistence.MemberRepository
 import org.springframework.stereotype.Service

@@ -1,6 +1,6 @@
-package com.macoder.styling.core.entity
+package com.macoder.styling.common.entity
 
-import com.macoder.styling.core.enum.Category
+import com.macoder.styling.common.enum.Category
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue

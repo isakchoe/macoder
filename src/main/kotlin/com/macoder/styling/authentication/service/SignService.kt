@@ -5,11 +5,11 @@ import com.macoder.styling.authentication.dto.SignInResponse
 import com.macoder.styling.authentication.dto.SignUpRequest
 import com.macoder.styling.authentication.dto.SignUpResponse
 import com.macoder.styling.authentication.persistence.MemberRefreshTokenRepository
-import com.macoder.styling.core.entity.Member
+import com.macoder.styling.common.entity.Member
 import com.macoder.styling.authentication.persistence.MemberRepository
 import com.macoder.styling.authentication.security.TokenProvider
 import com.macoder.styling.util.flushOrThrow
-import com.macoder.styling.core.entity.MemberRefreshToken
+import com.macoder.styling.common.entity.MemberRefreshToken
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service

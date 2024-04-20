@@ -1,6 +1,6 @@
 package com.macoder.styling.authentication.handler
 
-import com.macoder.styling.authentication.dto.ApiResponse
+import com.macoder.styling.common.dto.ApiResponse
 
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.MalformedJwtException

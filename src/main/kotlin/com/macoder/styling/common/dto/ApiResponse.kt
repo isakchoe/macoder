@@ -1,6 +1,6 @@
-package com.macoder.styling.authentication.dto
+package com.macoder.styling.common.dto
 
-import com.macoder.styling.core.enum.ApiStatus
+import com.macoder.styling.common.enum.ApiStatus
 
 data class ApiResponse(
     val status: ApiStatus,
