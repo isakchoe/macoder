@@ -1,7 +1,7 @@
 package com.macoder.styling.consulting.controller
 
 import com.macoder.styling.authentication.security.UserAuthorize
-import com.macoder.styling.consulting.dto.OrderConsultingRequest
+import com.macoder.styling.consulting.dto.ConsultingOrderRequest
 import com.macoder.styling.common.dto.ApiResponse
 import com.macoder.styling.consulting.service.ConsultingService
 import io.swagger.v3.oas.annotations.Operation
@@ -20,7 +20,7 @@ class ConsultingController(private val consultingService: ConsultingService) {
     @Operation(summary = "컨설팅 요청")
     @UserAuthorize
     @PostMapping("/order")
-    fun orderConsulting(@RequestBody request: OrderConsultingRequest) = ApiResponse.success(consultingService.orderConsulting(request))
+    fun orderConsulting(@RequestBody request: ConsultingOrderRequest) = ApiResponse.success(consultingService.orderConsulting(request))
 
 //    @Operation(summary = "컨설팅 응답")
 //    @StylistAuthorize

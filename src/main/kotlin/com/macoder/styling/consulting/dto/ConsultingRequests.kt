@@ -1,21 +1,19 @@
 package com.macoder.styling.consulting.dto
 
-import com.macoder.styling.common.entity.Member
-import com.macoder.styling.common.entity.Stylist
 import io.swagger.v3.oas.annotations.media.Schema
 
-data class OrderConsultingRequest(
-    @Schema(description = "스타일리스트", example = "부삭 스타일리스트")
-    var stylist : Stylist? = null,
-    @Schema(description = "회원", example = "존")
-    val member: Member,
+data class ConsultingOrderRequest(
+    @Schema(description = "스타일리스트 id", example = "123")
+    var stylistId: Int? = null,
+    @Schema(description = "회원 id", example = "12")
+    val memberId: Int,
     @Schema(description = "문의 사항", example = "가디건 추천 부탁")
-    var content: String? = null,
+    var consultingRequires: String,
 )
 
-data class DeliverConsultingRequest(
-    @Schema(description = "회원 아이디", example = "colabear754")
-    val account: String,
-    @Schema(description = "회원 비밀번호", example = "1234")
-    val password: String
+data class ConsultingWriteRequest(
+    @Schema(description = "컨설팅 id", example = "123")
+    val consultingId: Int,
+    @Schema(description = "컨설팅 컨텐츠", example = "유니클로 추천")
+    val consultingContents: String
 )

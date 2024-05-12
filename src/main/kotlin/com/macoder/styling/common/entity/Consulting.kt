@@ -1,6 +1,5 @@
 package com.macoder.styling.common.entity
 
-import com.macoder.styling.consulting.dto.OrderConsultingRequest
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
@@ -12,22 +11,24 @@ class Consulting(
 
     @ManyToOne
     @JoinColumn(name = "stylist_id")
-    var stylist: Stylist?,
+    val stylist: Stylist,
 
     @ManyToOne
     @JoinColumn(name = "member_id")
     val member: Member,
 
-    var content: String?,
+    var consultingRequire: String,
+
+    var consultingContents: String? = null,
 
     @Id
     val consultingId: Int ? = null
 ) {
     companion object {
-        fun from(request: OrderConsultingRequest) = Consulting(
-            stylist = request.stylist,
-            member = request.member,
-            content = request.content
+        fun from(stylist: Stylist, member: Member, content: String) = Consulting(
+            stylist = stylist,
+            member = member,
+            consultingRequire = content
         )
     }
 }
