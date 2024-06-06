@@ -1,8 +1,10 @@
 package com.macoder.styling.consulting.controller
 
+import com.macoder.styling.authentication.security.StylistAuthorize
 import com.macoder.styling.authentication.security.UserAuthorize
 import com.macoder.styling.consulting.dto.ConsultingOrderRequest
 import com.macoder.styling.common.dto.ApiResponse
+import com.macoder.styling.consulting.dto.ConsultingWriteRequest
 import com.macoder.styling.consulting.service.ConsultingService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -22,9 +24,10 @@ class ConsultingController(private val consultingService: ConsultingService) {
     @PostMapping("/order")
     fun orderConsulting(@RequestBody request: ConsultingOrderRequest) = ApiResponse.success(consultingService.orderConsulting(request))
 
-//    @Operation(summary = "컨설팅 응답")
-//    @StylistAuthorize
-//    @PostMapping("/deliver")
-//    fun deliverConsulting(@RequestBody request: DeliverConsultingRequest) = ApiResponse.success(consultingService.deliverConsulting(request))
+    @Operation(summary = "컨설팅 응답")
+    @StylistAuthorize
+    @PostMapping("/deliver")
+    fun deliverConsulting(@RequestBody request: ConsultingWriteRequest) =
+        ApiResponse.success(consultingService.writeConsulting(request))
 
 }

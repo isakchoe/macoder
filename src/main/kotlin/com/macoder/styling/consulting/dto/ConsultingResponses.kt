@@ -1,41 +1,47 @@
 package com.macoder.styling.consulting.dto
 
 import com.macoder.styling.common.entity.Consulting
-import com.macoder.styling.common.entity.Member
-import com.macoder.styling.common.entity.Stylist
 import io.swagger.v3.oas.annotations.media.Schema
 
 
-data class OrderConsultingResponse(
-    @Schema(description = "회원 아이디", example = "colabear754")
-    var stylist: Stylist?,
-    @Schema(description = "회원 비밀번호", example = "1234")
-    val member: Member,
-    @Schema(description = "회원 이름", example = "콜라곰")
+// 소비자가 컨설팅 요청할 때,
+data class ConsultingOrderResponse(
+    @Schema(description = "스타일리스트 아이디", example = "colabear754")
+    var stylistId: Int?,
+    @Schema(description = "회원 아이디", example = "1234")
+    var memberId: Int?,
+    @Schema(description = "컨설팅 아이디", example = "12")
+    var consultingId: Int?,
+    @Schema(description = "요청 컨설팅", example = "콜라곰")
     var content: String? = null,
 ) {
     companion object {
-        fun from(consulting: Consulting) = OrderConsultingResponse(
-            stylist = consulting.stylist,
-            member = consulting.member,
-            content = consulting.content
+        fun from(consulting: Consulting) = ConsultingOrderResponse(
+            stylistId = consulting.stylist.stylistId,
+            memberId = consulting.member.id,
+            consultingId = consulting.consultingId,
+            content = consulting.consultingRequire
         )
     }
 }
 
-data class DeliverConsultingResponse(
-    @Schema(description = "회원 아이디", example = "colabear754")
-    var stylist: Stylist?,
-    @Schema(description = "회원 비밀번호", example = "1234")
-    val member: Member,
-    @Schema(description = "회원 이름", example = "콜라곰")
+// 스타일리스트가 컨설팅 작설할 때,
+data class ConsultingWriteResponse(
+    @Schema(description = "스타일리스트 아이디", example = "colabear754")
+    var stylistId: Int?,
+    @Schema(description = "회원 아이디", example = "1234")
+    var memberId: Int?,
+    @Schema(description = "컨설팅 아이디", example = "12")
+    var consultingId: Int?,
+    @Schema(description = "요청 컨설팅", example = "콜라곰")
     var content: String? = null,
 ) {
     companion object {
-        fun from(consulting: Consulting) = DeliverConsultingResponse(
-            stylist = consulting.stylist,
-            member = consulting.member,
-            content = consulting.content
+        fun from(consulting: Consulting) = ConsultingWriteResponse(
+            stylistId = consulting.stylist.stylistId,
+            memberId = consulting.member.id,
+            consultingId = consulting.consultingId,
+            content = consulting.consultingContents
         )
     }
 }

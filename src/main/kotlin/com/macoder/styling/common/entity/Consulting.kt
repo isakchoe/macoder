@@ -1,6 +1,8 @@
 package com.macoder.styling.common.entity
 
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
@@ -17,15 +19,23 @@ class Consulting(
     @JoinColumn(name = "member_id")
     val member: Member,
 
+    // 소비자가 작성한 요구 사항
     var consultingRequire: String,
 
+    // 스타일리스트 답변
     var consultingContents: String? = null,
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val consultingId: Int ? = null
 ) {
+
+    fun writeConsultingContents(content: String){
+        this.consultingContents = content
+    }
+
     companion object {
-        fun from(stylist: Stylist, member: Member, content: String) = Consulting(
+        fun of(stylist: Stylist, member: Member, content: String) = Consulting(
             stylist = stylist,
             member = member,
             consultingRequire = content
