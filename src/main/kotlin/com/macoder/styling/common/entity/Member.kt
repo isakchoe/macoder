@@ -42,6 +42,12 @@ class Member(
         )
     }
 
+
+    fun becomeStylist() {
+        this.type = MemberType.STYLIST
+    }
+
+
     fun update(newMember: MemberUpdateRequest, encoder: PasswordEncoder) {
         this.password = newMember.newPassword
             ?.takeIf { it.isNotBlank() }

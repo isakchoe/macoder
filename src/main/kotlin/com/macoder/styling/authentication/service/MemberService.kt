@@ -45,6 +45,8 @@ class MemberService(
 
         val stylist = Stylist(member)
         stylistRepository.save(stylist)
+
+        member.becomeStylist()
         return MemberUpdateStylistResponse.of(true, stylist)
     }
 }
