@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 data class SignUpResponse(
     @Schema(description = "회원 고유키", example = "1")
-    val id: Int,
+    val id: Long,
     @Schema(description = "회원 아이디", example = "colabear754")
     val account: String,
     @Schema(description = "회원 이름", example = "콜라곰")
@@ -81,7 +81,7 @@ data class MemberUpdateStylistResponse(
 
 data class MemberInfoResponse(
     @Schema(description = "회원 고유키", example = "123e4567-e89b-12d3-a456-426614174000")
-    val id: Int,
+    val id: Long,
     @Schema(description = "회원 아이디", example = "colabear754")
     val account: String,
     @Schema(description = "회원 이름", example = "콜라곰")

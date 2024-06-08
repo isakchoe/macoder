@@ -4,7 +4,7 @@ import com.macoder.styling.common.entity.MemberRefreshToken
 import org.springframework.data.jpa.repository.JpaRepository
 
 
-interface MemberRefreshTokenRepository : JpaRepository<MemberRefreshToken, Int> {
-    fun findByMemberIdAndReissueCountLessThan(id: Int, count: Long): MemberRefreshToken?
+interface MemberRefreshTokenRepository : JpaRepository<MemberRefreshToken, Long> {
+    fun findByMemberIdAndReissueCountLessThan(id: Long, count: Long): MemberRefreshToken?
 }
 

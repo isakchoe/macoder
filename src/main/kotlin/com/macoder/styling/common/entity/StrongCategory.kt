@@ -20,7 +20,7 @@ class StrongCategory(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val StrongCategoryId: Int? = null
+    val StrongCategoryId: Long? = null
 
 ) {
 

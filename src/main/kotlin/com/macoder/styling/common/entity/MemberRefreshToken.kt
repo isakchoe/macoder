@@ -14,10 +14,12 @@ class MemberRefreshToken(
     @MapsId
     @JoinColumn(name = "member_id")
     val member: Member,
+
     private var refreshToken: String
 ) {
     @Id
-    val memberId: Int? = null
+    val memberId: Long? = null
+
     private var reissueCount = 0
 
     fun updateRefreshToken(refreshToken: String) {

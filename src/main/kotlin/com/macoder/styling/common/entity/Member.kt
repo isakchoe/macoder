@@ -20,12 +20,18 @@ class Member(
 
     var age: Int? = null,
 
+    var phoneNumber: String? = null,
+
+    var email: String? = null,
+
+
+
     @Enumerated(EnumType.STRING)
     var type: MemberType = MemberType.USER,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
 ) {
     val createdAt: LocalDateTime = LocalDateTime.now()

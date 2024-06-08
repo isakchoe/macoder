@@ -16,7 +16,7 @@ class FashionCategory(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val fashionCategoryId: Int? = null
+    val fashionCategoryId: Long? = null
 ) {
 
     // 카테고리별.. 선택한 스타일리스트... 필요한가?

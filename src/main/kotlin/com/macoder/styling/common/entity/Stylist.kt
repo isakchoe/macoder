@@ -20,7 +20,7 @@ class Stylist(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val stylistId: Int? = null
+    val stylistId: Long? = null
 
 ) {
     var starPoint: Double = 0.0
