@@ -54,7 +54,7 @@ class TokenProvider(
     @Transactional
     fun recreateAccessToken(oldAccessToken: String): String {
         val subject = decodeJwtPayloadSubject(oldAccessToken)
-        memberRefreshTokenRepository.findByMemberIdAndReissueCountLessThan((subject.split(':')[0]).toInt(), reissueLimit)
+        memberRefreshTokenRepository.findByMemberIdAndReissueCountLessThan((subject.split(':')[0]).toLong(), reissueLimit)
             ?.increaseReissueCount() ?: throw ExpiredJwtException(null, null, "Refresh token is expired.")
         return createAccessToken(subject)
     }
@@ -63,7 +63,7 @@ class TokenProvider(
     fun validateRefreshToken(refreshToken: String, oldAccessToken: String) {
         validateAndParseToken(refreshToken)
         val memberId = decodeJwtPayloadSubject(oldAccessToken).split(':')[0]
-        memberRefreshTokenRepository.findByMemberIdAndReissueCountLessThan(memberId.toInt(), reissueLimit)
+        memberRefreshTokenRepository.findByMemberIdAndReissueCountLessThan(memberId.toLong(), reissueLimit)
             ?.takeIf { it.validateRefreshToken(refreshToken) } ?: throw ExpiredJwtException(null, null, "Refresh token is expired.")
     }
 

@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.*
 class MemberController(private val memberService: MemberService) {
     @Operation(summary = "회원 정보 조회")
     @GetMapping
-    fun getMemberInfo(@AuthenticationPrincipal user: User) = ApiResponse.success(memberService.getMemberInfo(user.username.toInt()))
+    fun getMemberInfo(@AuthenticationPrincipal user: User) = ApiResponse.success(memberService.getMemberInfo(user.username.toLong()))
 
     @Operation(summary = "회원 탈퇴")
     @DeleteMapping
     fun deleteMember(@AuthenticationPrincipal user: User) =
-        ApiResponse.success(memberService.deleteMember(user.username.toInt()))
+        ApiResponse.success(memberService.deleteMember(user.username.toLong()))
 
     @Operation(summary = "회원 정보 수정")
     @PutMapping
     fun updateMember(@AuthenticationPrincipal user: User, @RequestBody request: MemberUpdateRequest) =
-        ApiResponse.success(memberService.updateMember(user.username.toInt(), request))
+        ApiResponse.success(memberService.updateMember(user.username.toLong(), request))
 
 
     @Operation(summary = "스타일리스트 자격 신청")
     @PostMapping()
     fun updateMemberToStylist(@AuthenticationPrincipal user: User, @RequestBody request: MemberUpdateRequest) =
-        ApiResponse.success(memberService.updateMemberToStylist(user.username.toInt(), request))
+        ApiResponse.success(memberService.updateMemberToStylist(user.username.toLong(), request))
 }
