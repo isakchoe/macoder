@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface ConsultingRepository: JpaRepository<Consulting, Long> {
 
-    fun findAllByStylist(stylist: Stylist): Consulting
+    fun findAllByStylist(stylist: Stylist): List<Consulting>
 
 }
