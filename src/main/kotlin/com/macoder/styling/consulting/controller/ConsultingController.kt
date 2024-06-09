@@ -8,13 +8,17 @@ import com.macoder.styling.consulting.dto.ConsultingWriteRequest
 import com.macoder.styling.consulting.service.ConsultingService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.User
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 
 
 @RequestMapping("/consulting")
@@ -24,8 +28,12 @@ class ConsultingController(private val consultingService: ConsultingService) {
 
     @Operation(summary = "컨설팅 요청")
     @UserAuthorize
-    @PostMapping("/order")
-    fun orderConsulting(@RequestBody request: ConsultingOrderRequest) = ApiResponse.success(consultingService.orderConsulting(request))
+    @PostMapping("/order", consumes = ["multipart/form-data"])
+    fun orderConsulting(
+        @RequestParam("file") file: MultipartFile,
+        @RequestPart("request") request: ConsultingOrderRequest
+    ) = ApiResponse.success(consultingService.orderConsulting(file, request))
+
 
     @Operation(summary = "컨설팅 응답")
     @StylistAuthorize
