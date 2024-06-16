@@ -28,10 +28,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.368")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
     runtimeOnly ("com.mysql:mysql-connector-j")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 }

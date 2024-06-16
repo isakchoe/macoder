@@ -1,5 +1,7 @@
 package com.macoder.styling.consulting.service
 
+import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.macoder.styling.authentication.persistence.MemberRepository
 import com.macoder.styling.authentication.persistence.StylistRepository
 import com.macoder.styling.consulting.dto.ConsultingOrderRequest
@@ -7,6 +9,7 @@ import com.macoder.styling.consulting.dto.ConsultingOrderResponse
 import com.macoder.styling.consulting.persistence.ConsultingRepository
 import com.macoder.styling.common.entity.Consulting
 import com.macoder.styling.common.entity.ConsultingImage
+import com.macoder.styling.common.entity.ConsumerRequirement
 import com.macoder.styling.consulting.dto.ConsultingListResponse
 import com.macoder.styling.consulting.dto.ConsultingWriteRequest
 import com.macoder.styling.consulting.dto.ConsultingWriteResponse
@@ -31,37 +34,80 @@ class ConsultingService(
     private val stylistRepository: StylistRepository,
     private val memberRepository: MemberRepository,
     private val consultingImageRepository: ConsultingImageRepository,
-    @Value("\${file.upload-dir-request}") private val uploadDir: String
+    @Value("\${file.upload-dir-request}") private val uploadDir: String,
+    //@Value("\${cloud.aws.s3.bucket}") private val bucketName: String
 ) {
+
+    //private val s3Client: AmazonS3 = AmazonS3ClientBuilder.defaultClient()
+
 
     @Transactional
     fun orderConsulting(file: MultipartFile, request: ConsultingOrderRequest): ConsultingOrderResponse {
         val stylist = stylistRepository.findById(request.stylistId ?: 1)
             .orElseThrow { NoSuchElementException("Stylist not found") }
 
-        // todo 토큰 파싱으로 대체... 필요없는 부분
-        val member =
-            memberRepository.findById(request.memberId).orElseThrow { NoSuchElementException("Member not found") }
+        val member = memberRepository.findById(request.memberId)
+            .orElseThrow { NoSuchElementException("Member not found") }
 
-        println(uploadDir)
         val fileName = UUID.randomUUID().toString() + "_" + file.originalFilename
-        val filePath = saveFileToLocalFileSystem(file, fileName)
+        //val fileUrl = uploadFileToS3(file, fileName)
+
         val image = ConsultingImage(
             contentType = file.contentType ?: "unknown",
-            path = filePath.toString(),
+            path = "dsds",
             title = request.memberId.toString(),
             description = request.consultingRequires
         )
 
-        println("---")
         consultingImageRepository.save(image)
 
-        val consulting = Consulting.of(stylist, member, request.consultingRequires)
+        val consultingRequirement = ConsumerRequirement.of(member, image, null, request.consultingRequires)
 
-        return ConsultingOrderResponse.from(consultingRepository.flushOrThrow(IllegalArgumentException("이미 사용중인 아이디입니다.")) {
-            save(consulting)
-        })
+        val consulting = Consulting.of(stylist, member, consultingRequirement)
+
+        return ConsultingOrderResponse.from(
+            consultingRepository.flushOrThrow(IllegalArgumentException("이미 사용중인 아이디입니다.")) {
+                save(consulting)
+            }
+        )
     }
+
+//    private fun uploadFileToS3(file: MultipartFile, fileName: String): String {
+//        val inputStream = file.inputStream
+//        s3Client.putObject(bucketName, fileName, inputStream, null)
+//        return s3Client.getUrl(bucketName, fileName).toString()
+//    }
+
+
+
+//
+//    @Transactional
+//    fun orderConsulting(file: MultipartFile, request: ConsultingOrderRequest): ConsultingOrderResponse {
+//        val stylist = stylistRepository.findById(request.stylistId ?: 1)
+//            .orElseThrow { NoSuchElementException("Stylist not found") }
+//
+//        // todo 토큰 파싱으로 대체... 필요없는 부분
+//        val member =
+//            memberRepository.findById(request.memberId).orElseThrow { NoSuchElementException("Member not found") }
+//
+//        println(uploadDir)
+//        val fileName = UUID.randomUUID().toString() + "_" + file.originalFilename
+//        val filePath = saveFileToLocalFileSystem(file, fileName)
+//        val image = ConsultingImage(
+//            contentType = file.contentType ?: "unknown",
+//            path = filePath.toString(),
+//            title = request.memberId.toString(),
+//            description = request.consultingRequires
+//        )
+//
+//        consultingImageRepository.save(image)
+//
+//        val consulting = Consulting.of(stylist, member, request.consultingRequires)
+//
+//        return ConsultingOrderResponse.from(consultingRepository.flushOrThrow(IllegalArgumentException("이미 사용중인 아이디입니다.")) {
+//            save(consulting)
+//        })
+//    }
 
 
     private fun saveFileToLocalFileSystem(file: MultipartFile, fileName: String): Path {
@@ -82,7 +128,7 @@ class ConsultingService(
             ?: throw NoSuchElementException("Consulting not found")
 
         // contesnts 수정
-        consulting.writeConsultingContents(request.consultingContents)
+        // todo
 
         return ConsultingWriteResponse.from(consulting)
     }
