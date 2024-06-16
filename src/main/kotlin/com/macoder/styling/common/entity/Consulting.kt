@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToOne
 
 
 @Entity
@@ -23,11 +24,13 @@ class Consulting(
     // 컨설팅 진행 상태
     var status: ConsultingStatus =  ConsultingStatus.REQUESTED,
 
-    // 소비자가 작성한 요구 사항
-    var consultingRequire: String? = null,
+    @OneToOne
+    @JoinColumn
+    val consultingRequirement: ConsumerRequirement,
 
-    // 스타일리스트 답변
-    var consultingContents: String? = null,
+    @OneToOne
+    @JoinColumn
+    val stylistComment: StylistComment? = null,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,15 +42,12 @@ class Consulting(
     var photoUrl: String? = null
 
 
-    fun writeConsultingContents(content: String){
-        this.consultingContents = content
-    }
 
     companion object {
-        fun of(stylist: Stylist, member: Member, content: String) = Consulting(
+        fun of(stylist: Stylist, member: Member, consultingRequirement: ConsumerRequirement) = Consulting(
             stylist = stylist,
             member = member,
-            consultingRequire = content
+            consultingRequirement = consultingRequirement
         )
     }
 }

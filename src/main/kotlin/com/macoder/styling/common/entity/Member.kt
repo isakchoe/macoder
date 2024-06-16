@@ -20,12 +20,6 @@ class Member(
 
     var age: Int? = null,
 
-    var phoneNumber: String? = null,
-
-    var email: String? = null,
-
-
-
     @Enumerated(EnumType.STRING)
     var type: MemberType = MemberType.USER,
 
@@ -35,6 +29,10 @@ class Member(
 
 ) {
     val createdAt: LocalDateTime = LocalDateTime.now()
+
+    var phoneNumber: String? = null
+
+    var email: String? = null
 
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
     val stylist: Stylist?= null

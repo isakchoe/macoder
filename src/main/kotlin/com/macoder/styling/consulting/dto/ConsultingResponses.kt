@@ -21,7 +21,7 @@ data class ConsultingOrderResponse(
             stylistId = consulting.stylist.stylistId,
             memberId = consulting.member.id,
             consultingId = consulting.consultingId,
-            content = consulting.consultingRequire
+            content = consulting.consultingRequirement.detailDescription
         )
     }
 }
@@ -42,12 +42,12 @@ data class ConsultingWriteResponse(
             stylistId = consulting.stylist.stylistId,
             memberId = consulting.member.id,
             consultingId = consulting.consultingId,
-            content = consulting.consultingContents
+            content = consulting.stylistComment?.consultingContents
         )
     }
 }
 
-
+// todo 하나로 합치기...
 data class ConsultingResponse(
     @Schema(description = "컨설팅 아이디", example = "12")
     var consultingId: Long?,
@@ -71,7 +71,7 @@ data class ConsultingResponse(
                 consultingId = consulting.consultingId,
                 stylistId = consulting.stylist.stylistId,
                 memberId = consulting.member.id,
-                content = consulting.consultingRequire,
+                content = consulting.consultingRequirement.detailDescription,
                 status = consulting.status
             )
         }
