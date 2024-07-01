@@ -21,7 +21,7 @@ data class ConsultingOrderResponse(
             stylistId = consulting.stylist.stylistId,
             memberId = consulting.member.id,
             consultingId = consulting.consultingId,
-            content = consulting.consultingRequirement.detailDescription
+            content = consulting.consumerRequirements[0].detailDescription
         )
     }
 }
@@ -42,7 +42,7 @@ data class ConsultingWriteResponse(
             stylistId = consulting.stylist.stylistId,
             memberId = consulting.member.id,
             consultingId = consulting.consultingId,
-            content = consulting.stylistComment?.consultingContents
+            content = consulting.stylistComments[0].consultingContents
         )
     }
 }
@@ -71,7 +71,7 @@ data class ConsultingResponse(
                 consultingId = consulting.consultingId,
                 stylistId = consulting.stylist.stylistId,
                 memberId = consulting.member.id,
-                content = consulting.consultingRequirement.detailDescription,
+                content = consulting.consumerRequirements[0].detailDescription,
                 status = consulting.status
             )
         }

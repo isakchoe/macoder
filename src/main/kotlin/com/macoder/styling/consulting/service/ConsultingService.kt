@@ -1,7 +1,5 @@
 package com.macoder.styling.consulting.service
 
-import com.amazonaws.services.s3.AmazonS3
-import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.macoder.styling.authentication.persistence.MemberRepository
 import com.macoder.styling.authentication.persistence.StylistRepository
 import com.macoder.styling.consulting.dto.ConsultingOrderRequest
@@ -10,6 +8,7 @@ import com.macoder.styling.consulting.persistence.ConsultingRepository
 import com.macoder.styling.common.entity.Consulting
 import com.macoder.styling.common.entity.ConsultingImage
 import com.macoder.styling.common.entity.ConsumerRequirement
+import com.macoder.styling.common.entity.StylistComment
 import com.macoder.styling.consulting.dto.ConsultingListResponse
 import com.macoder.styling.consulting.dto.ConsultingWriteRequest
 import com.macoder.styling.consulting.dto.ConsultingWriteResponse
@@ -42,18 +41,18 @@ class ConsultingService(
 
 
     @Transactional
-    fun orderConsulting(file: MultipartFile, request: ConsultingOrderRequest): ConsultingOrderResponse {
+    fun orderConsulting(file: MultipartFile?, request: ConsultingOrderRequest): ConsultingOrderResponse {
         val stylist = stylistRepository.findById(request.stylistId ?: 1)
             .orElseThrow { NoSuchElementException("Stylist not found") }
 
         val member = memberRepository.findById(request.memberId)
             .orElseThrow { NoSuchElementException("Member not found") }
 
-        val fileName = UUID.randomUUID().toString() + "_" + file.originalFilename
+        val fileName = UUID.randomUUID().toString() + "_" + file?.originalFilename
         //val fileUrl = uploadFileToS3(file, fileName)
 
         val image = ConsultingImage(
-            contentType = file.contentType ?: "unknown",
+            contentType = file?.contentType ?: "unknown",
             path = "dsds",
             title = request.memberId.toString(),
             description = request.consultingRequires
@@ -61,9 +60,11 @@ class ConsultingService(
 
         consultingImageRepository.save(image)
 
-        val consultingRequirement = ConsumerRequirement.of(member, image, null, request.consultingRequires)
+        val consulting = Consulting.of(stylist, member)
 
-        val consulting = Consulting.of(stylist, member, consultingRequirement)
+        val consultingRequirement = ConsumerRequirement.of(consulting, member, image, null, request.consultingRequires)
+
+        consulting.consumerRequirements.add(consultingRequirement)
 
         return ConsultingOrderResponse.from(
             consultingRepository.flushOrThrow(IllegalArgumentException("이미 사용중인 아이디입니다.")) {
@@ -122,14 +123,21 @@ class ConsultingService(
     }
 
 
-    fun writeConsulting(request: ConsultingWriteRequest): ConsultingWriteResponse {
+    fun writeConsulting(file: MultipartFile?, request: ConsultingWriteRequest): ConsultingWriteResponse {
         // consulting patch by id
         val consulting = consultingRepository.findById(request.consultingId).getOrNull()
             ?: throw NoSuchElementException("Consulting not found")
 
-        // contesnts 수정
-        // todo
+        val stylistComment =
+            StylistComment.of(
+                stylist = consulting.stylist,
+                consultingImage1 = null,
+                consultingImage2 = null,
+                consultingContents = request.consultingContents,
+                consulting =  consulting
+            )
 
+        consulting.stylistComments.add(stylistComment)
         return ConsultingWriteResponse.from(consulting)
     }
 

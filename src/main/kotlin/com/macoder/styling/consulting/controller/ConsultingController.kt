@@ -8,12 +8,10 @@ import com.macoder.styling.consulting.dto.ConsultingWriteRequest
 import com.macoder.styling.consulting.service.ConsultingService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.User
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestPart
@@ -30,23 +28,24 @@ class ConsultingController(private val consultingService: ConsultingService) {
     @UserAuthorize
     @PostMapping("/order", consumes = ["multipart/form-data"])
     fun orderConsulting(
-        @RequestParam("file") file: MultipartFile,
+        @RequestParam("file") file: MultipartFile? = null,
         @RequestPart("request") request: ConsultingOrderRequest
     ) = ApiResponse.success(consultingService.orderConsulting(file, request))
 
 
     @Operation(summary = "컨설팅 응답")
     @StylistAuthorize
-    @PostMapping("/deliver")
-    fun deliverConsulting(@RequestBody request: ConsultingWriteRequest) =
-        ApiResponse.success(consultingService.writeConsulting(request))
+    @PostMapping("/deliver", consumes = ["multipart/form-data"])
+    fun deliverConsulting(
+        @RequestParam("file") file: MultipartFile? = null,
+        @RequestPart("request") request: ConsultingWriteRequest) =
+        ApiResponse.success(consultingService.writeConsulting(file, request))
 
 
     @Operation(summary = "컨설팅 리스트 조회")
     @StylistAuthorize
     @GetMapping()
     fun getConsultingList(@AuthenticationPrincipal user: User): ApiResponse {
-
         return ApiResponse.success(consultingService.getConsultingList(user.username.toLong()))
     }
 

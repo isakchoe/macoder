@@ -23,12 +23,25 @@ class StylistComment(
     @JoinColumn(name = "sec_image_id")
     val consultingImage2: ConsultingImage? = null,
 
+    @ManyToOne
+    @JoinColumn(name = "consulting_id")
+    val consulting: Consulting,
+
     var consultingContents: String? = null
-
 ) {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
+    companion object {
+        fun of(consulting: Consulting, consultingContents: String?, stylist: Stylist, consultingImage1: ConsultingImage?, consultingImage2: ConsultingImage?): StylistComment {
+            return StylistComment(
+                consulting = consulting,
+                consultingContents = consultingContents,
+                consultingImage1 = consultingImage1,
+                consultingImage2 = consultingImage2,
+                stylist = stylist
+            )
+        }
+    }
 }

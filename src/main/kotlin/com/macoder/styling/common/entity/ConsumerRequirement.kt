@@ -14,8 +14,6 @@ class ConsumerRequirement(
     @JoinColumn(name = "member_id")
     val consumer: Member,
 
-    // image_id 2ㄱㅐ??
-    // null 허용해야함.. manytoone 아마 not null 일듯 ...
     @ManyToOne
     @JoinColumn(name = "first_image_id")
     val consultingImage1: ConsultingImage? = null,
@@ -24,8 +22,11 @@ class ConsumerRequirement(
     @JoinColumn(name = "sec_image_id")
     val consultingImage2: ConsultingImage? = null,
 
-    var detailDescription: String? = null
+    @ManyToOne
+    @JoinColumn(name = "consulting_id")
+    val consulting: Consulting,
 
+    var detailDescription: String? = null
 ) {
 
     @Id
@@ -35,8 +36,9 @@ class ConsumerRequirement(
 
     companion object {
 
-        fun of(member: Member, image1: ConsultingImage?, image2: ConsultingImage?, detailDescription: String?): ConsumerRequirement {
+        fun of(consulting: Consulting, member: Member, image1: ConsultingImage?, image2: ConsultingImage?, detailDescription: String?): ConsumerRequirement {
             return ConsumerRequirement(
+                consulting = consulting,
                 consumer = member,
                 consultingImage1 = image1,
                 consultingImage2 = image2,
