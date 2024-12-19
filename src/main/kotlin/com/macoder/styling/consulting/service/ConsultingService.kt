@@ -14,9 +14,9 @@ import com.macoder.styling.consulting.dto.ConsultingWriteRequest
 import com.macoder.styling.consulting.dto.ConsultingWriteResponse
 import com.macoder.styling.consulting.persistence.ConsultingImageRepository
 import com.macoder.styling.util.flushOrThrow
-import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 import java.io.IOException
 import java.nio.file.Files
@@ -142,6 +142,7 @@ class ConsultingService(
     }
 
 
+    @Transactional
     fun getConsultingList(stylistId: Long): ConsultingListResponse {
         val stylist = stylistRepository.findById(stylistId).getOrNull()?:
             throw NoSuchElementException("Not found stylist")
